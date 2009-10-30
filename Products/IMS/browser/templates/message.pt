@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+<body>
+
+<metal:main fill-slot="main">
+    <tal:main-macro metal:define-macro="main"
+                    i18n:domain="IMS">
+
+      <ul metal:use-macro="context/@@message_macros/message_actions" />
+
+      <h1 class="documentFirstHeading" tal:content="context/Title">
+        Title
+      </h1>
+
+      <tal:message metal:use-macro="context/@@message_macros/message" />
+
+      <dl metal:use-macro="context/@@message_macros/message_thread" />
+
+    </tal:main-macro>
+</metal:main>
+
+</body>
+</html>

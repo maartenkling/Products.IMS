@@ -1,0 +1,108 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+<body>
+
+<metal:main fill-slot="main">
+    <tal:main-macro metal:define-macro="main"
+           i18n:domain="IMS">
+
+      <h1 class="documentFirstHeading" tal:content="context/Title">
+        Title
+      </h1>
+
+      <div metal:use-macro="here/global_statusmessage/macros/portal_message">
+        Portal status message
+      </div>
+
+      <p class="discreet" tal:condition="not: view/getMessages">
+        <span i18n:translate="no_sent_messages" tal:replace="view/sent">
+          You have no sent messages
+        </span>
+        <span i18n:translate="no_received_messages" tal:replace="view/received">
+          You have no received messages
+        </span>
+      </p>
+
+      <form action="" class="messageListingForm" method="post" tal:condition="view/getMessages"
+            tal:attributes="action context/absolute_url">
+        <table class="listing nosort messageListing">
+          <colgroup>
+            <col />
+            <col width="100%" />
+            <col />
+            <col />
+            <col tal:condition="view/received" />
+            <col tal:condition="view/hasAnyPerm"/>
+          </colgroup>
+          <thead>
+            <th class="nosort"></th>
+            <th i18n:translate="">Subject</th>
+            <th i18n:translate="" tal:condition="view/received">From</th>
+            <th i18n:translate="" tal:condition="view/sent">To</th>
+            <th i18n:translate="">Date</th>
+            <th class="nosort" colspan="2"
+                tal:condition="python: view.received or view.hasAnyPerm"
+                tal:attributes="colspan python: (view.received and view.hasAnyPerm) and 2 or 1"></th>
+          </thead>
+          <tbody>
+            <tal:message tal:repeat="message view/getMessages">
+            <tr tal:define="odd repeat/message/even;
+                            class python:odd and 'odd' or 'even';
+                            read python:message['read'] and 'read' or 'unread'"
+                tal:attributes="class string:${read} ${class}">
+              <td>
+                <input type="checkbox" class="noborder" name="uids:list" value="" tal:attributes="value message/uid" />
+              </td>
+              <td>
+                <img src="++resource++message_read_icon.gif" tal:condition="message/read" title="read" alt="read" i18n:attributes="alt; title" />
+                <img src="++resource++message_icon.gif" tal:condition="not: message/read" title="unread" alt="unread" i18n:attributes="alt; title" />
+                <a href="" tal:content="message/title" tal:attributes="href message/url/base;">
+                  Title
+                </a>
+                <img src="++resource++message_forwarded.gif" tal:condition="message/forwarded" alt="forwarded" i18n:attributes="alt" />
+                <img src="++resource++message_replied.gif" tal:condition="message/replied" alt="replied" i18n:attributes="alt" />
+              </td>
+              <td tal:condition="view/received">
+                <a href="" tal:condition="message/sender" tal:content="message/sender/fullname|message/sender" 
+                           tal:attributes="href string:${portal_url}/author/${message/sender/username|message/sender}"
+                           tal:omit-tag="not: message/sender/username|nothing">
+                  Sender Name
+                </a>
+              </td>
+              <td tal:condition="view/sent">
+                <tal:receiver repeat="receiver message/receiver">
+                <a href="" tal:content="receiver/fullname|receiver" tal:attributes="href string:${portal_url}/author/${receiver/username|nothing}" tal:omit-tag="not: receiver/username|nothing">
+                  Receiver Name
+                </a><tal:sep condition="not: repeat/receiver/end">,</tal:sep>
+                </tal:receiver>
+              </td>
+              <td tal:content="message/created">2008/07/23 10:40</td>
+              <td tal:condition="view/received">
+                <a href="" tal:attributes="href message/url/reply" title="reply" i18n:attributes="title" tal:condition="message/sender">
+                  <img src="++resource++message_reply.gif" alt="reply" i18n:attributes="alt" /> <tal:reply i18n:translate="">reply</tal:reply>
+                </a>
+              </td>
+              <td tal:condition="view/hasAnyPerm">
+                <a href="" tal:attributes="href message/url/forward" title="forward" i18n:attributes="title">
+                  <tal:forward i18n:translate="">forward</tal:forward> <img src="++resource++message_forward.gif" alt="forward" i18n:attributes="alt" />
+                </a>
+              </td>
+            </tr>
+            </tal:message>
+          </tbody>
+        </table>
+        <div class="formControls">
+          <input class="context" type="submit" name="markread:method" value="mark as read"
+                 i18n:attributes="value" />
+          <input class="context destructive" type="submit" name="delete:method" value="delete"
+                 i18n:attributes="value label_delete" i18n:domain="plone" />
+        </div>
+      </form>
+
+    </tal:main-macro>
+</metal:main>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/@@standard_macros/page"
+      i18n:domain="plone">
+  <head>
+  </head>
+  
+  <body>
+    <div metal:fill-slot="body">
+    
+      <div metal:use-macro="context/@@base-pageform.html/form" />
+      
+      <div metal:use-macro="context/@@message_macros/message_thread" />
+    
+    </div>
+  </body>
+</html>

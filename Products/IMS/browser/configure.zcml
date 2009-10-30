@@ -1,0 +1,123 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="plone">
+
+    <browser:page
+        for="..interfaces.IMessageFolder"
+        name="view"
+        class=".views.MessageFolderView"
+        permission="ims.UseSystem"
+        />
+
+    <browser:page
+        for="..interfaces.IMessageFolder"
+        name="markread"
+        class=".views.MessageMarkReadView"
+        permission="ims.UseSystem"
+        />
+
+    <browser:page
+        for="..interfaces.IMessageFolder"
+        name="delete"
+        class=".views.MessageDeleteView"
+        permission="zope2.DeleteObjects"
+        />
+
+    <browser:page
+        for="..interfaces.IMessage"
+        name="view"
+        class=".views.MessageView"
+        permission="ims.UseSystem"
+        />
+
+    <browser:page
+        for="*"
+        name="message_macros"
+        template="templates/message_macros.pt"
+        permission="ims.UseSystem"
+        />
+
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        name="ims.members"
+        component=".vocabulary.members"
+        />
+
+    <browser:page
+        for="*"
+        name="newMessage"
+        class=".views.NewMessageForm"
+        permission="ims.SendMessageToAny"
+        />
+
+    <browser:page
+        for="..interfaces.ISendable"
+        name="newMessage"
+        class=".views.NewContextMessageForm"
+        permission="ims.SendMessage"
+        />
+
+    <browser:page
+        for="..interfaces.IReceivedMessage"
+        name="reply"
+        class=".views.ReplyMessageForm"
+        permission="ims.SendMessage"
+        />
+
+    <browser:page
+        for="..interfaces.IMessage"
+        name="forward"
+        class=".views.ForwardMessageForm"
+        permission="ims.SendMessageToAny"
+        />
+
+    <browser:viewlet
+        name="ims.bar"
+        manager="plone.app.layout.viewlets.interfaces.IPortalTop"
+        class=".viewlets.IMSBarViewlet"
+        permission="ims.UseSystem"
+        />
+
+    <browser:resource
+        name="message_icon.gif"
+        image="images/message_icon.gif"
+        />
+
+    <browser:resource
+        name="message_read_icon.gif"
+        image="images/message_read_icon.gif"
+        />
+
+    <browser:resource
+        name="receivedmessagefolder_icon.gif"
+        image="images/receivedmessagefolder_icon.gif"
+        />
+
+    <browser:resource
+        name="sentmessagefolder_icon.gif"
+        image="images/sentmessagefolder_icon.gif"
+        />
+
+    <browser:resource
+        name="message_forward.gif"
+        image="images/message_forward.gif"
+        />
+
+    <browser:resource
+        name="message_forwarded.gif"
+        image="images/message_forwarded.gif"
+        />
+
+    <browser:resource
+        name="message_reply.gif"
+        image="images/message_reply.gif"
+        />
+
+    <browser:resource
+        name="message_replied.gif"
+        image="images/message_replied.gif"
+        />
+
+</configure>

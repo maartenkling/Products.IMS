@@ -1,0 +1,20 @@
+<div id="portal-imsbar-wrapper"
+     i18n:domain="IMS">
+
+<ul id="portal-imsbar"
+    tal:condition="python:view.ims_actions"
+    class="visualInline">
+
+    <tal:actions tal:repeat="action view/ims_actions">
+        <li tal:define="icon action/icon | nothing;
+                        icon python:icon is not None and icon or view.getIconFor(action['category'], action['id'], None);">
+            <a href=""
+               tal:attributes="href action/url;"
+            ><strong tal:omit-tag="not: action/unread|nothing"><img src="" tal:condition="icon" tal:attributes="src icon" /> <tal:actionname i18n:translate="" 
+                             tal:content="action/title">dummy</tal:actionname
+            ><tal:unread tal:condition="action/unread|nothing"> (<tal:no tal:content="action/unread|nothing">10</tal:no>)</tal:unread></strong></a>
+        </li>
+    </tal:actions>
+
+</ul>
+</div>

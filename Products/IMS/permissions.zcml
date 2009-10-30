@@ -1,0 +1,24 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           i18n_domain="Five">
+
+  <permission
+      id="ims.UseSystem"
+      title="IMS: Use System"
+      />
+
+  <permission
+      id="ims.SendMessage"
+      title="IMS: Send Message"
+      />
+
+  <permission
+      id="ims.SendMessageToAny"
+      title="IMS: Send Message to Any"
+      />
+
+  <permission
+      id="ims.SendMessageToMany"
+      title="IMS: Send Message to Many"
+      />
+
+</configure>

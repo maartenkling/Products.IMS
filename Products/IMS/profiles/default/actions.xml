@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<object name="portal_actions" meta_type="Plone Actions Tool"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <object name="ims" meta_type="CMF Action Category" purge="False">
+  <object name="newmessage" meta_type="CMF Action" i18n:domain="IMS">
+   <property name="title" i18n:translate="">New Message</property>
+   <property name="description" i18n:translate=""></property>
+   <property
+      name="url_expr">string:${object_url}/newMessage</property>
+   <property name="icon_expr"></property>
+   <property name="available_expr"></property>
+   <property name="permissions">
+    <element value="IMS: Send Message To Any"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+  <object name="receivedmessages" meta_type="CMF Action" i18n:domain="IMS">
+   <property name="title" i18n:translate="">Received Messages</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:${portal/portal_membership/getHomeUrl}/received</property>
+   <property name="icon_expr"></property>
+   <property name="available_expr">python:(member is not None) and (portal.portal_membership.getHomeFolder() is not None) and ('received' in portal.portal_membership.getHomeFolder().objectIds())</property>
+   <property name="permissions">
+    <element value="IMS: Use System"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+  <object name="sentmessages" meta_type="CMF Action" i18n:domain="IMS">
+   <property name="title" i18n:translate="">Sent Messages</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:${portal/portal_membership/getHomeUrl}/sent</property>
+   <property name="icon_expr"></property>
+   <property name="available_expr">python:(member is not None) and (portal.portal_membership.getHomeFolder() is not None) and ('sent' in portal.portal_membership.getHomeFolder().objectIds())</property>
+   <property name="permissions">
+    <element value="IMS: Use System"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+ </object>
+ <object name="message" meta_type="CMF Action Category" purge="False">
+  <object name="reply" meta_type="CMF Action" i18n:domain="IMS">
+   <property name="title" i18n:translate="">reply</property>
+   <property name="description" i18n:translate=""></property>
+   <property
+      name="url_expr">string:${object_url}/reply</property>
+   <property name="icon_expr"></property>
+   <property name="available_expr">python:getattr(object, 'isReceived', 0) and object.getSender()</property>
+   <property name="permissions">
+    <element value="IMS: Send Message"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+  <object name="forward" meta_type="CMF Action" i18n:domain="IMS">
+   <property name="title" i18n:translate="">forward</property>
+   <property name="description" i18n:translate=""></property>
+   <property
+      name="url_expr">string:${object_url}/forward</property>
+   <property name="icon_expr"></property>
+   <property name="available_expr"></property>
+   <property name="permissions">
+    <element value="IMS: Send Message to Any"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+ </object>
+</object>

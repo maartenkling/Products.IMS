@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<rolemap>
+  <permissions>
+    <permission name="IMS: Send Message" acquire="False">
+      <role name="Manager" />
+      <role name="Member" />
+    </permission>
+    <permission name="IMS: Send Message to Any" acquire="False">
+      <role name="Manager" />
+    </permission>
+    <permission name="IMS: Send Message to Many" acquire="False">
+      <role name="Manager" />
+    </permission>
+    <permission name="IMS: Use System" acquire="False">
+      <role name="Manager" />
+      <role name="Member" />
+    </permission>
+  </permissions>
+</rolemap>

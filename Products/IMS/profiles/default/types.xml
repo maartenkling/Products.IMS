@@ -1,0 +1,8 @@
+<object name="portal_types" meta_type="Plone Types Tool">
+ <object name="Message"
+    meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="ReceivedMessageFolder"
+    meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="SentMessageFolder"
+    meta_type="Factory-based Type Information with dynamic views"/>
+</object>

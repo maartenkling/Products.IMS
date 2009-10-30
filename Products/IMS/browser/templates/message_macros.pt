@@ -1,0 +1,79 @@
+<tal:message metal:define-macro="message" i18n:domain="IMS">
+  <dl class="messageHeader">
+    <dt tal:condition="view/sender"><tal:from i18n:translate="">From</tal:from>:</dt>
+    <dd tal:condition="view/sender">
+      <a href="" tal:condition="view/sender" tal:content="view/sender/fullname|view/sender" 
+                 tal:attributes="href string:${portal_url}/author/${view/sender/username|view/sender}"
+                 tal:omit-tag="not: view/sender/username|nothing">
+        Sender Name
+      </a>
+    </dd>
+    <dt><tal:to i18n:translate="">To</tal:to>:</dt>
+    <dd>
+      <tal:receiver repeat="receiver view/receiver">
+      <a href="" tal:content="receiver/fullname|receiver" tal:attributes="href string:${portal_url}/author/${receiver/username|receiver}" tal:omit-tag="not: receiver/username|nothing">
+        Receiver Name
+      </a><tal:sep condition="not: repeat/receiver/end">,</tal:sep>
+      </tal:receiver>
+    </dd>
+    <dt><tal:date i18n:translate="">Date</tal:date>:</dt>
+    <dd tal:content="view/date">
+      2008/07/23 15:22
+    </dd>
+  </dl>
+  <p>
+    <pre tal:content="context/getMessage" class="messageBody">
+      The message
+    </pre>
+  </p>
+</tal:message>
+
+<tal:messageThread metal:define-macro="message_thread">
+<dl class="messageThread"
+    tal:condition="view/getMessageThread|nothing" i18n:domain="IMS">
+<tal:thread tal:repeat="message view/getMessageThread|nothing">
+  <dt tal:attributes="class python:message['received'] and 'received' or 'sent'">
+    <strong tal:content="message/title">Title</strong>
+    <span class="documentByLine">
+      <tal:sent tal:condition="message/sent" i18n:translate="thread_label_sent">
+        sent to
+        <tal:receiver repeat="receiver message/receiver" i18n:name="name">
+        <a href="" tal:content="receiver/fullname|receiver" tal:attributes="href string:${portal_url}/author/${receiver/username|nothing}" tal:omit-tag="not: receiver/username|nothing">
+          Receiver Name
+        </a><tal:sep condition="not: repeat/receiver/end">,</tal:sep>
+        </tal:receiver> - <span class="date" i18n:name="date" tal:content="message/created">2008/07/23 15:22</span>
+      </tal:sent>
+      <tal:received tal:condition="message/received" i18n:translate="thread_label_received">
+        received from
+        <a href="" tal:condition="message/sender" tal:content="message/sender/fullname|message/sender" 
+                   tal:attributes="href string:${portal_url}/author/${message/sender/username|message/sender}"
+                   tal:omit-tag="not: message/sender/username|nothing" i18n:name="name">
+          Sender Name
+        </a> - <span class="date" i18n:name="date" tal:content="message/created">2008/07/23 15:22</span>
+      </tal:received>
+    </span>
+  </dt>
+  <dd tal:attributes="class python:message['received'] and 'received' or 'sent'">
+    <pre tal:content="message/message" class="messageBody">
+      The message
+    </pre>
+  </dd>
+</tal:thread>
+</dl>
+</tal:messageThread>
+
+<ul id="messageActions"
+    metal:define-macro="message_actions"
+    tal:condition="python:view.message_actions"
+    class="visualInline" i18n:domain="IMS">
+  <tal:actions tal:repeat="action view/message_actions">
+    <li tal:define="icon action/icon | nothing;
+                    icon python:icon is not None and icon or view.getIconFor(action['category'], action['id'], None);">
+        <a href=""
+           tal:attributes="href action/url;"
+        ><img src="" tal:condition="icon" tal:attributes="src icon" /> <tal:actionname i18n:translate=""
+                                                                                       tal:content="action/title">dummy</tal:actionname
+        ></a>
+    </li>
+  </tal:actions>
+</ul>

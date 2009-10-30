@@ -1,0 +1,119 @@
+/* <dtml-with base_properties> (do not remove this :) */
+/* <dtml-call "REQUEST.set('portal_url', portal_url())"> (not this either :) */
+
+#portal-imsbar, #messageActions {
+  line-height: 1.6em;
+  color: &dtml-fontColor;;
+  padding: 0.5em 3em 0em 3em;
+  margin: 0;
+  text-align: right;
+  text-transform: &dtml-textTransform;;
+  list-style: none;
+}
+
+#messageActions {
+  float:right;
+  font-size:91%;
+  padding:0 1em 0 0;
+}
+
+#portal-imsbar li, #messageActions li {
+  color: &dtml-globalFontColor;;
+  margin-left: 1em;
+  display: inline;
+}
+
+#portal-imsbar li a, #messageActions li a {
+  text-decoration: none;
+  color: &dtml-globalFontColor;;
+  border:none;
+}
+
+.messageListingForm .formControls input.context {
+  font-size:100%;
+}
+
+table.messageListing {
+  font-size:100%;
+}
+
+.messageListing .unread {
+  font-weight:bold;
+}
+
+.messageListing td {
+  white-space:nowrap;
+}
+
+.messageHeader dt {
+  float:left;
+  width:5em;
+  clear:both;
+  line-height:1.2em;
+}
+
+.messageHeader dd {
+  margin:0 0 0.5em 0;
+  line-height:1.2em;
+}
+
+pre.messageBody {
+  border:none;
+  background-color:transparent;
+  padding:0;
+}
+
+.messageThread {
+  margin-top:2em;
+  font-size:90%;
+}
+
+.messageThread dt {
+  margin:1em 0 0 0;
+  padding:0.2em 1em;
+  background-color:&dtml-globalBackgroundColor;;
+  border-color:&dtml-globalBorderColor;;
+  border-width:1px;
+  border-style:solid;
+}
+
+.messageThread dd {
+  padding:0.2em 1em;
+  background-color:&dtml-evenRowBackgroundColor;;
+  border-color:&dtml-globalBorderColor;;
+  border-width:0 1px 1px 1px;
+  border-style:solid;
+  margin:0;
+}
+
+.messageThread dd.received {
+  background-color:&dtml-oddRowBackgroundColor;;
+}
+
+#formfield-form-subject label,
+#formfield-form-receiver label,
+#formfield-form-message label {
+  font-size:120%;
+}
+
+input#form\.subject {
+  font-size: 160%;
+  font-family: "Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  width: 99%;
+}
+
+select#form\.receiver {
+  width: 99%;
+}
+
+textarea#form\.message {
+  width: 99%;
+}
+
+input#form\.actions\.cancel {
+  background-color:#ffce7b;
+  border-color:#ffa500;
+}
+
+/* </dtml-with> */

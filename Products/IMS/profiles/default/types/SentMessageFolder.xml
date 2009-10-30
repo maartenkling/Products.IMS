@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<object name="SentMessageFolder"
+   meta_type="Factory-based Type Information with dynamic views"
+   i18n:domain="plone" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="title" i18n:translate="">SentMessageFolder</property>
+ <property name="description"
+     i18n:translate="">The folder holding sent messages</property>
+ <property name="content_icon">++resource++sentmessagefolder_icon.gif</property>
+ <property name="content_meta_type">SentMessageFolder</property>
+ <property name="product">IMS</property>
+ <property name="factory">addSentMessageFolder</property>
+ <property name="immediate_view">view</property>
+ <property name="global_allow">False</property>
+ <property name="filter_content_types">True</property>
+ <property name="allowed_content_types">
+  <element value="Message"/>
+ </property>
+ <property name="allow_discussion">False</property>
+ <property name="default_view">view</property>
+ <property name="view_methods">
+  <element value="view"/>
+ </property>
+ <alias from="(Default)" to="view"/>
+ <alias from="view" to="view"/>
+ <alias from="atct_edit" to="view"/>
+ <alias from="base_edit" to="view"/>
+ <action title="View" action_id="view" category="object" condition_expr=""
+    url_expr="string:${folder_url}/" visible="True">
+  <permission value="View"/>
+ </action>
+</object>

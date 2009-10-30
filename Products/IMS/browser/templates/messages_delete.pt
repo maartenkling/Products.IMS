@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+<body>
+
+<metal:main fill-slot="main">
+    <tal:main-macro metal:define-macro="main"
+           i18n:domain="IMS">
+
+      <h1 class="documentFirstHeading"
+          i18n:translate="alert_really_delete">
+        Do you really want to delete the following messages?
+      </h1>
+
+      <form action="@@delete" method="post" tal:condition="view/getMessages">
+        <ul>
+          <li tal:repeat="message view/getMessages">
+            <input type="hidden" name="paths:list" value="" tal:attributes="value message/url" class="hidden" />
+            <span i18n:translate="message_sentby" tal:condition="view/received">
+              <a href="" tal:content="message/title" tal:attributes="title message/message;
+                                                                     href message/url;" i18n:name="message">
+                Title
+              </a>
+              sent by
+              <a href="" tal:condition="message/sender" tal:content="message/sender/fullname|message/sender" 
+                         tal:attributes="href string:${portal_url}/author/${message/sender/username|message/sender}"
+                         tal:omit-tag="not: message/sender/username|nothing" i18n:name="name">
+                Sender Name
+              </a>
+            </span>
+
+            <span i18n:translate="message_sentto" tal:condition="view/sent">
+              <a href="" tal:content="message/title" tal:attributes="title message/message;
+                                                                     href message/url;" i18n:name="message">
+                Title
+              </a>
+              sent to
+              <tal:receiver repeat="receiver message/receiver">
+              <a href="" i18n:name="name" tal:content="receiver/fullname|receiver" tal:attributes="href string:${portal_url}/author/${receiver/username|nothing}" tal:omit-tag="not: receiver/username|nothing">
+                Receiver Name
+              </a><tal:sep condition="not: repeat/receiver/end">,</tal:sep>
+              </tal:receiver>
+            </span>
+          </li>
+        </ul>
+        <div class="formControls">
+          <input class="context" type="submit" name="delete_confirm" value="delete"
+                 i18n:attributes="value label_delete" i18n:domain="plone" />
+          <input class="context" type="submit" name="cancel" value="cancel"
+                 i18n:attributes="value label_cancel" i18n:domain="plone" />
+        </div>
+        <input tal:replace="structure context/@@authenticator/authenticator" />
+        <input name="orig_template" value="view" type="hidden">
+      </form>
+
+    </tal:main-macro>
+</metal:main>
+
+</body>
+</html>

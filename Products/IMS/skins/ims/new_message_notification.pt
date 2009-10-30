@@ -1,0 +1,23 @@
+<tal:body i18n:domain="IMS" define="dummy python:request.RESPONSE.setHeader('Content-Type', 'text/plain;; charset=%s' % here.plone_utils.getSiteEncoding())"
+><tal:hello i18n:translate="mail_hello">Hello <tal:name i18n:name="name" tal:content="options/name">John Smith</tal:name>,</tal:hello>
+    
+    <tal:message i18n:translate="mail_message_top">You have received a new message from <tal:name i18n:name="name" tal:content="options/sender">Jake Black</tal:name> over at 
+    <tal:site i18n:name="site" tal:content="options/site">Site Title</tal:site> [<tal:url i18n:name="url" tal:content="options/siteurl">URL</tal:url>].
+    
+    --------------------
+    
+    Subject: <tal:subject i18n:name="subject" tal:content="options/message/Title">message subject</tal:subject>
+    </tal:message>
+    <tal:message tal:content="options/message/getMessage">message body</tal:message>
+    <tal:message i18n:translate="mail_message_bottom">
+    --------------------
+    
+    you may reply to this message by clicking the following link:</tal:message>
+    
+    <tal:url tal:content="string:${options/url}/reply">Message URL</tal:url>
+    
+    <tal:regards i18n:translate="mail_greetings">With kind regards,</tal:regards>
+    
+--
+<span tal:replace="options/emailfrom" />
+</tal:body>

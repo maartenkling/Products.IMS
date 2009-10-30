@@ -1,0 +1,137 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2008-04-07 14:15-100\n"
+"Last-Translator: Simon Kaeser <skaeser@raptus.com>\n"
+"Language-code: de\n"
+"Language-name: Deutsch\n"
+"Preferred-encodings: utf-8 latin1\n"
+"Domain: IMS\n"
+"X-is-fallback-for: de-ch de-de de-at de-li de-lu\n"
+"Project-Id-Version: IMS\n"
+"PO-Revision-Date: 2007-11-01 10:18+0100\n"
+"Language-Team: Simon Kaeser <skaeser@raptus.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "title_receivedmessagefolder"
+msgstr "Erhaltene Nachrichten"
+
+msgid "title_sentmessagefolder"
+msgstr "Gesendete Nachrichten"
+
+msgid "New Message"
+msgstr "Neue Nachricht"
+
+msgid "Received Messages"
+msgstr "Erhaltene Nachrichten"
+
+msgid "Sent Messages"
+msgstr "Gesendete Nachrichten"
+
+msgid "reply"
+msgstr "antworten"
+
+msgid "forward"
+msgstr "weiterleiten"
+
+msgid "alert_really_delete"
+msgstr "Sind Sie sicher, dass Sie nachfolgende Nachrichten löschen wollen?"
+
+msgid "message_sentby"
+msgstr "${message} erhalten von ${name}"
+
+msgid "message_sentto"
+msgstr "${message} gesendet an ${name}"
+
+msgid "thread_label_received"
+msgstr "erhalten von ${name} - ${date}"
+
+msgid "thread_label_sent"
+msgstr "gesendet an ${name} - ${date}"
+
+msgid "Subject"
+msgstr "Betreff"
+
+msgid "From"
+msgstr "Von"
+
+msgid "To"
+msgstr "An"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Message"
+msgstr "Nachricht"
+
+msgid "no_sent_messages"
+msgstr "Sie haben keine gesendeten Nachrichten"
+
+msgid "no_received_messages"
+msgstr "Sie haben keine erhaltenen Nachrichten"
+
+msgid "read"
+msgstr "gelesen"
+
+msgid "unread"
+msgstr "ungelesen"
+
+msgid "forwarded"
+msgstr "weitergeleitet"
+
+msgid "replied"
+msgstr "geantwortet"
+
+msgid "mark as read"
+msgstr "als gelesen markieren"
+
+msgid "delete"
+msgstr "löschen"
+
+msgid "send message"
+msgstr "Nachricht senden"
+
+msgid "Reply to Message"
+msgstr "Auf Nachricht antworten"
+
+msgid "Forward Message"
+msgstr "Nachricht weiterleiten"
+
+msgid "send"
+msgstr "senden"
+
+msgid "cancel"
+msgstr "abbrechen"
+
+msgid "Your message has been sent successfully"
+msgstr "Ihre Nachricht wurde erfolgreich gesendet"
+
+msgid "Sending your message failed"
+msgstr "Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten"
+
+msgid "mail_subject"
+msgstr "Sie haben eine neue Nachricht erhalten"
+
+msgid "mail_hello"
+msgstr "Hallo ${name},"
+
+msgid "mail_message_top"
+msgstr "Sie haben auf ${site} [${url}]\n"
+"    eine neue Nachricht von ${name} erhalten.\n"
+"\n"
+"    --------------------\n"
+"\n"
+"    Betreff: ${subject}\n"
+
+msgid "mail_message_bottom"
+msgstr "\n"
+"    --------------------\n"
+"\n"
+"    um auf diese Nachricht zu antworten folgen Sie bitte dem untenstehenden Link:"
+    
+msgid "mail_greetings"
+msgstr "Mit Freundlichen Grüssen"

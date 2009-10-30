@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<action-icons xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="IMS">
+ <action-icon category="ims" action_id="newmessage"
+              title="New Message" priority="0"
+              icon_expr="++resource++message_icon.gif"
+              i18n:attributes="title"/>
+ <action-icon category="ims" action_id="receivedmessages"
+              title="Received Messages" priority="0"
+              icon_expr="++resource++receivedmessagefolder_icon.gif"
+              i18n:attributes="title"/>
+ <action-icon category="ims" action_id="sentmessages"
+              title="Sent Messages" priority="0"
+              icon_expr="++resource++sentmessagefolder_icon.gif"
+              i18n:attributes="title"/>
+ <action-icon category="message" action_id="reply"
+              title="Reply" priority="0"
+              icon_expr="++resource++message_reply.gif"
+              i18n:attributes="title"/>
+ <action-icon category="message" action_id="forward"
+              title="Forward" priority="0"
+              icon_expr="++resource++message_forward.gif"
+              i18n:attributes="title"/>
+</action-icons>
