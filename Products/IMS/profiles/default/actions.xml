@@ -10,7 +10,7 @@
    <property name="icon_expr"></property>
    <property name="available_expr"></property>
    <property name="permissions">
-    <element value="IMS: Send Message To Any"/>
+    <element value="IMS: Send Message to Any"/>
    </property>
    <property name="visible">True</property>
   </object>
