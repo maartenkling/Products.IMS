@@ -17,10 +17,10 @@
       </div>
 
       <p class="discreet" tal:condition="not: view/getMessages">
-        <span i18n:translate="no_sent_messages" tal:replace="view/sent">
+        <span i18n:translate="no_sent_messages" tal:condition="view/sent" tal:omit-tag="python:1">
           You have no sent messages
         </span>
-        <span i18n:translate="no_received_messages" tal:replace="view/received">
+        <span i18n:translate="no_received_messages" tal:condition="view/received" tal:omit-tag="python:1">
           You have no received messages
         </span>
       </p>
