@@ -7,7 +7,7 @@
    <property name="description" i18n:translate=""></property>
    <property
       name="url_expr">string:${object_url}/newMessage</property>
-   <property name="icon_expr"></property>
+   <property name="icon_expr">string:/++resource++message_icon.gif</property>
    <property name="available_expr"></property>
    <property name="permissions">
     <element value="IMS: Send Message to Any"/>
@@ -18,7 +18,7 @@
    <property name="title" i18n:translate="">Received Messages</property>
    <property name="description" i18n:translate=""></property>
    <property name="url_expr">string:${portal/portal_membership/getHomeUrl}/received</property>
-   <property name="icon_expr"></property>
+   <property name="icon_expr">string:/++resource++receivedmessagefolder_icon.gif</property>
    <property name="available_expr">python:(member is not None) and (portal.portal_membership.getHomeFolder() is not None) and ('received' in portal.portal_membership.getHomeFolder().objectIds())</property>
    <property name="permissions">
     <element value="IMS: Use System"/>
@@ -29,7 +29,7 @@
    <property name="title" i18n:translate="">Sent Messages</property>
    <property name="description" i18n:translate=""></property>
    <property name="url_expr">string:${portal/portal_membership/getHomeUrl}/sent</property>
-   <property name="icon_expr"></property>
+   <property name="icon_expr">string:/++resource++sentmessagefolder_icon.gif</property>
    <property name="available_expr">python:(member is not None) and (portal.portal_membership.getHomeFolder() is not None) and ('sent' in portal.portal_membership.getHomeFolder().objectIds())</property>
    <property name="permissions">
     <element value="IMS: Use System"/>
@@ -43,7 +43,7 @@
    <property name="description" i18n:translate=""></property>
    <property
       name="url_expr">string:${object_url}/reply</property>
-   <property name="icon_expr"></property>
+   <property name="icon_expr">string:/++resource++message_reply.gif</property>
    <property name="available_expr">python:getattr(object, 'isReceived', 0) and object.getSender()</property>
    <property name="permissions">
     <element value="IMS: Send Message"/>
@@ -55,7 +55,7 @@
    <property name="description" i18n:translate=""></property>
    <property
       name="url_expr">string:${object_url}/forward</property>
-   <property name="icon_expr"></property>
+   <property name="icon_expr">string:/++resource++message_forward.gif</property>
    <property name="available_expr"></property>
    <property name="permissions">
     <element value="IMS: Send Message to Any"/>

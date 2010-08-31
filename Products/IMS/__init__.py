@@ -5,8 +5,6 @@ from Products.CMFCore import utils as cmfutils
 
 from zope.i18nmessageid import MessageFactory
 IMSMessageFactory = MessageFactory('IMS')
-from Products.PlacelessTranslationService.utility import PTSTranslationDomain
-imsdomain = PTSTranslationDomain('IMS')
 
 def initialize(context):
 

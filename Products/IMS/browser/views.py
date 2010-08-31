@@ -142,7 +142,7 @@ class MessageView(BrowserView):
         context_state = getMultiAdapter((self.context, self.request),
                                         name=u'plone_context_state')
 
-        self.message_actions = context_state.actions().get('message', None)
+        self.message_actions = context_state.actions(category='message')
 
         plone_utils = getToolByName(self.context, 'plone_utils')
         self.getIconFor = plone_utils.getIconFor

@@ -3,7 +3,7 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:cmf="http://namespaces.zope.org/cmf"
     xmlns:five="http://namespaces.zope.org/five"
-    i18n_domain="IMS">
+    i18n_domain="ims">
 
     <include file="permissions.zcml" />
     <include package=".browser"/>
@@ -20,10 +20,6 @@
     <!-- File System Directory Views registration -->
     <cmf:registerDirectory
         name="ims"/>
-
-    <utility
-        component=".imsdomain"
-        name="IMS"/>
 
     <adapter
         factory=".adapter.IMSMessage"/>

@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.2 - Unreleased
+----------------
+
+* Plone 4.0 support [radekj]
+
+
 0.1 - Unreleased
 ----------------
 
