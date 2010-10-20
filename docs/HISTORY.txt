@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.2 - Unreleased
-----------------
+1.0b1 (2010-10-20)
+------------------
 
 * Plone 4.0 support [radekj]
 
