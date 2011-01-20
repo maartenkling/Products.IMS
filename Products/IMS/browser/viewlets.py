@@ -27,7 +27,10 @@ class IMSBarViewlet(ViewletBase):
                                         name=u'plone_context_state')
         tools = getMultiAdapter((self.context, self.request), name=u'plone_tools')
 
-        self.ims_actions = context_state.actions(category="ims")
+        try: # Plone 4+
+            self.ims_actions = context_state.actions(category="ims")
+        except TypeError: # Plone 3
+            self.ims_actions = context_state.actions().get('ims', ())
         for action in self.ims_actions:
             if action['id'] == 'receivedmessages':
                 catalog = getToolByName(self.context, 'portal_catalog')
