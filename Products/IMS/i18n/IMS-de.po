@@ -135,3 +135,6 @@ msgstr "\n"
     
 msgid "mail_greetings"
 msgstr "Mit Freundlichen Grüssen"
+
+msgid "Unfortunately it is not possible to send messages using your user account. Please use a Plone user rather than a Zope user."
+msgstr "Leider ist das Senden von Nachrichten mit Ihrem Benutzerkonto nicht möglich. Bitte verwenden Sie einen Plonebenutzer anstelle eines Zopebenutzers."

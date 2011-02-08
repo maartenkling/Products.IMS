@@ -1,3 +1,6 @@
+from Acquisition import aq_inner, aq_parent
+from OFS.interfaces import IApplication
+
 from zope.interface import implements, Interface, alsoProvides
 from zope.component import adapts, getMultiAdapter
 
@@ -46,14 +49,30 @@ class IMSMessage(object):
                     shortened.append(sline)
         return '\n'.join(shortened)
 
+    def _getOwner(self, container):
+        try:
+            user = container.getWrappedOwner()
+        except AttributeError, e: # we have a zope rather than a plone user
+            owner = [u for u, roles in container.get_local_roles() if 'Owner' in roles][0]
+            context = aq_inner(self.context)
+            user = context.acl_users.getUserById(owner)
+            while not user and not IApplication.providedBy(context):
+                context = aq_parent(context)
+                user = context.acl_users.getUserById(owner)
+        return user
 
     def _createMessage(self, container, title, message, receiver, sender, replyTo=None, interface=None):
+        if container is None:
+            return None
         try:
             typestool = getToolByName(self.context, 'portal_types')
             mship = getToolByName(self.context, 'portal_membership')
             id = self._getSafeId(container, title)
             current_auth = mship.getAuthenticatedMember()
-            newSecurityManager(self.context.REQUEST, container.getWrappedOwner())
+            user = self._getOwner(container)
+            if not user:
+                return None
+            newSecurityManager(self.context.REQUEST, user)
             typestool.constructContent(type_name='Message', container=container, id=id, title=title, message=message, receiver=receiver, replyTo=replyTo, sender=sender)
             instance = container[id]
             if interface is not None:
@@ -61,7 +80,7 @@ class IMSMessage(object):
             instance.reindexObject()
             newSecurityManager(self.context.REQUEST, current_auth)
             return instance
-        except:
+        except Exception, e:
             return None
 
     def _getMessageFolder(self, userid, id, type_name):
@@ -75,7 +94,10 @@ class IMSMessage(object):
         if not ISendable.providedBy(homefolder):
             alsoProvides(homefolder, ISendable)
         if not id in homefolder.objectIds():
-            newSecurityManager(self.context.REQUEST, homefolder.getWrappedOwner())
+            user = self._getOwner(homefolder)
+            if not user:
+                return None
+            newSecurityManager(self.context.REQUEST, user)
             typestool.constructContent(type_name=type_name, container=homefolder, id=id)
             folder = homefolder[id]
             folder.reindexObject()
@@ -97,7 +119,8 @@ class IMSMessage(object):
         received = []
         for r in receiver:
             received.append(self._createMessage(self._getMessageFolder(r, 'received', 'ReceivedMessageFolder'), title, message, [r], sender, replyToReceiver, IReceivedMessage))
-        if received is not None and sender:
+        received = filter(None, received)
+        if len(received) and sender:
             sent = self._createMessage(self._getMessageFolder(sender, 'sent', 'SentMessageFolder'), title, message, receiver, sender, replyToSender, ISentMessage)
             if sent is not None:
                 for r in received:

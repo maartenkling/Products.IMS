@@ -3,6 +3,7 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:cmf="http://namespaces.zope.org/cmf"
     xmlns:five="http://namespaces.zope.org/five"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="ims">
 
     <include file="permissions.zcml" />
@@ -43,5 +44,9 @@
         for="Products.IMS.interfaces.IMessageBeforeDelete"
         handler=".utils.handleMessageDelete"
         />
+  
+    <utility zcml:condition="not-have plone-4"
+             component=".imsdomain"
+             name="IMS" />
 
 </configure>

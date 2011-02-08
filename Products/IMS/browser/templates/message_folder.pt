@@ -65,7 +65,7 @@
                 <img src="++resource++message_replied.gif" tal:condition="message/replied" alt="replied" i18n:attributes="alt" />
               </td>
               <td tal:condition="view/received">
-                <a href="" tal:condition="message/sender" tal:content="message/sender/fullname|message/sender" 
+                <a href="" tal:condition="message/sender" tal:content="python:message.get('sender', {}).get('fullname', '') or message.get('sender', {}).get('username', '')" 
                            tal:attributes="href string:${portal_url}/author/${message/sender/username|message/sender}"
                            tal:omit-tag="not: message/sender/username|nothing">
                   Sender Name
@@ -73,18 +73,18 @@
               </td>
               <td tal:condition="view/sent">
                 <tal:receiver repeat="receiver message/receiver">
-                <a href="" tal:content="receiver/fullname|receiver" tal:attributes="href string:${portal_url}/author/${receiver/username|nothing}" tal:omit-tag="not: receiver/username|nothing">
+                <a href="" tal:content="python:receiver.get('fullname', '') or receiver.get('username', '')" tal:attributes="href string:${portal_url}/author/${receiver/username|nothing}" tal:omit-tag="not: receiver/username|nothing">
                   Receiver Name
                 </a><tal:sep condition="not: repeat/receiver/end">,</tal:sep>
                 </tal:receiver>
               </td>
               <td tal:content="message/created">2008/07/23 10:40</td>
-              <td tal:condition="view/received">
+              <td tal:condition="message/url/reply">
                 <a href="" tal:attributes="href message/url/reply" title="reply" i18n:attributes="title" tal:condition="message/sender">
                   <img src="++resource++message_reply.gif" alt="reply" i18n:attributes="alt" /> <tal:reply i18n:translate="">reply</tal:reply>
                 </a>
               </td>
-              <td tal:condition="view/hasAnyPerm">
+              <td tal:condition="message/url/forward">
                 <a href="" tal:attributes="href message/url/forward" title="forward" i18n:attributes="title">
                   <tal:forward i18n:translate="">forward</tal:forward> <img src="++resource++message_forward.gif" alt="forward" i18n:attributes="alt" />
                 </a>

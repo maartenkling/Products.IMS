@@ -1,5 +1,6 @@
 from Acquisition import aq_inner, aq_parent
 from AccessControl import Unauthorized
+from OFS.interfaces import IApplication
 
 from zope.component import getMultiAdapter
 
@@ -62,19 +63,20 @@ class MessageFolderView(BrowserView):
         ploneview = getMultiAdapter((self.context, self.request), name='plone')
         catalog = getToolByName(self.context, 'portal_catalog')
         mship = getToolByName(self.context, 'portal_membership')
+        acl_users = self.context.acl_users
         results = catalog(object_provides=IMessage.__identifier__, path={'query': '/'.join(self.context.getPhysicalPath())}, sort_on='created', sort_order='reverse')
         return [{'title': message.Title,
                  'message': message.getMessage,
-                 'sender': message.getSender and mship.getMemberInfo(message.getSender) or message.getSender,
-                 'receiver': [mship.getMemberInfo(receiver) or receiver for receiver in message.getReceiver],
+                 'sender': message.getSender and mship.getMemberInfo(message.getSender) or {'username': message.getSender},
+                 'receiver': [mship.getMemberInfo(receiver) or {'username': receiver} for receiver in message.getReceiver],
                  'read': message.read,
                  'replied': message.replied,
                  'forwarded': message.forwarded,
                  'created': ploneview.toLocalizedTime(message.created, 1),
                  'uid': message.UID,
                  'url': {'base': message.getURL(),
-                         'forward': '%s/%s' % (message.getURL(), 'forward'),
-                         'reply': '%s/%s' % (message.getURL(), 'reply')}} for message in results]
+                         'forward': self.hasAnyPerm and '%s/%s' % (message.getURL(), 'forward') or '',
+                         'reply': self.received and '%s/%s' % (message.getURL(), 'reply') or ''}} for message in results]
 
 class MessageMarkReadView(BrowserView):
     """view to mark messages as read
@@ -120,8 +122,8 @@ class MessageDeleteView(MessageFolderView):
         results = catalog(object_provides=IMessage.__identifier__, path={'query': base}, UID=self.request.get('uids', []), sort_on='Date', sort_order='reverse')
         return [{'title': message.Title,
                  'message': message.getMessage,
-                 'sender': message.getSender and mship.getMemberInfo(message.getSender) or message.getSender,
-                 'receiver': [mship.getMemberInfo(receiver) or receiver for receiver in message.getReceiver],
+                 'sender': message.getSender and mship.getMemberInfo(message.getSender) or {'username': message.getSender},
+                 'receiver': [mship.getMemberInfo(receiver) or {'username': receiver} for receiver in message.getReceiver],
                  'url': '%s/%s' % (base, message.getId)} for message in results]
 
 class MessageView(BrowserView):
@@ -156,13 +158,13 @@ class MessageView(BrowserView):
     @memoize
     def receiver(self):
         mship = getToolByName(self.context, 'portal_membership')
-        return [mship.getMemberInfo(receiver) for receiver in self.context.getReceiver()]
+        return [mship.getMemberInfo(receiver) or {'username': receiver} for receiver in self.context.getReceiver()]
 
     @property
     @memoize
     def sender(self):
         mship = getToolByName(self.context, 'portal_membership')
-        return self.context.getSender() and mship.getMemberInfo(self.context.getSender()) or self.context.getSender()
+        return self.context.getSender() and mship.getMemberInfo(self.context.getSender()) or {'username': self.context.getSender()}
 
     @property
     @memoize
@@ -209,6 +211,12 @@ class NewMessageForm(formbase.PageForm):
     label = _(u"New Message")
 
     def __call__(self):
+        mship = getToolByName(self.context, 'portal_membership')
+        current_auth = mship.getAuthenticatedMember()
+        if IApplication.providedBy(aq_parent(aq_parent(current_auth.getUser()))):
+            IStatusMessage(self.request).addStatusMessage(_(u"Unfortunately it is not possible to send messages using your user account. Please use a Plone user rather than a Zope user."), type='error')
+            return self.request.response.redirect(self.context.absolute_url())
+        
         self.request.set('disable_border', True)
 
         self.form_fields.get('receiver').field.default = None
@@ -234,7 +242,7 @@ class NewMessageForm(formbase.PageForm):
         imsmessage = IIMSMessage(self.context)
 
         message = imsmessage.sendMessage(data['subject'], data['message'], data['receiver'])
-        if message is not None:
+        if message:
             IStatusMessage(self.request).addStatusMessage(_(u"Your message has been sent successfully"), type='info')
             return self.request.response.redirect(message.absolute_url())
         else:
@@ -293,7 +301,7 @@ class ReplyMessageForm(formbase.PageForm):
         """Reply to Message
         """
         message = self.context.replyToMessage(self.request.form.get('subject', data['subject']), data['message'])
-        if message is not None:
+        if message:
             IStatusMessage(self.request).addStatusMessage(_(u"Your message has been sent successfully"), type='info')
             return self.request.response.redirect(message.absolute_url())
         else:
@@ -339,7 +347,7 @@ class ForwardMessageForm(formbase.PageForm):
         """Forward Message
         """
         message = self.context.forwardMessage(self.request.form.get('subject', data['subject']), data['message'], data['receiver'])
-        if message is not None:
+        if message:
             IStatusMessage(self.request).addStatusMessage(_(u"Your message has been sent successfully"), type='info')
             return self.request.response.redirect(message.absolute_url())
         else:

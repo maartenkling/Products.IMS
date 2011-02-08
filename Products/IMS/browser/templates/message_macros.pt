@@ -2,7 +2,7 @@
   <dl class="messageHeader">
     <dt tal:condition="view/sender"><tal:from i18n:translate="">From</tal:from>:</dt>
     <dd tal:condition="view/sender">
-      <a href="" tal:condition="view/sender" tal:content="view/sender/fullname|view/sender" 
+      <a href="" tal:condition="view/sender" tal:content="python:view.sender.get('fullname', '') or view.sender.get('username', '')" 
                  tal:attributes="href string:${portal_url}/author/${view/sender/username|view/sender}"
                  tal:omit-tag="not: view/sender/username|nothing">
         Sender Name
@@ -11,7 +11,7 @@
     <dt><tal:to i18n:translate="">To</tal:to>:</dt>
     <dd>
       <tal:receiver repeat="receiver view/receiver">
-      <a href="" tal:content="receiver/fullname|receiver" tal:attributes="href string:${portal_url}/author/${receiver/username|receiver}" tal:omit-tag="not: receiver/username|nothing">
+      <a href="" tal:content="python:receiver.get('fullname', '') or receiver.get('username', '')" tal:attributes="href string:${portal_url}/author/${receiver/username|receiver}" tal:omit-tag="not: receiver/username|nothing">
         Receiver Name
       </a><tal:sep condition="not: repeat/receiver/end">,</tal:sep>
       </tal:receiver>
@@ -38,14 +38,14 @@
       <tal:sent tal:condition="message/sent" i18n:translate="thread_label_sent">
         sent to
         <tal:receiver repeat="receiver message/receiver" i18n:name="name">
-        <a href="" tal:content="receiver/fullname|receiver" tal:attributes="href string:${portal_url}/author/${receiver/username|nothing}" tal:omit-tag="not: receiver/username|nothing">
+        <a href="" tal:content="python:receiver.get('fullname', '') or receiver.get('username', '')" tal:attributes="href string:${portal_url}/author/${receiver/username|nothing}" tal:omit-tag="not: receiver/username|nothing">
           Receiver Name
         </a><tal:sep condition="not: repeat/receiver/end">,</tal:sep>
         </tal:receiver> - <span class="date" i18n:name="date" tal:content="message/created">2008/07/23 15:22</span>
       </tal:sent>
       <tal:received tal:condition="message/received" i18n:translate="thread_label_received">
         received from
-        <a href="" tal:condition="message/sender" tal:content="message/sender/fullname|message/sender" 
+        <a href="" tal:condition="message/sender" tal:content="python:message.get('sender', {}).get('fullname', '') or message.get('sender', {}).get('username', '')" 
                    tal:attributes="href string:${portal_url}/author/${message/sender/username|message/sender}"
                    tal:omit-tag="not: message/sender/username|nothing" i18n:name="name">
           Sender Name
