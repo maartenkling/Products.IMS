@@ -10,7 +10,10 @@ from zope.formlib import form
 
 from Products.statusmessages.interfaces import IStatusMessage
 
-from Products.Five.formlib import formbase
+try:
+    from five.formlib import formbase
+except ImportError:
+    from Products.Five.formlib import formbase
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
