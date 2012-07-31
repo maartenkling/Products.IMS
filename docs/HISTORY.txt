@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.0b5 (unreleased)
+------------------
+
+* Fixed import alias for compatibility with Plone 4.1 [radekj]
+
 1.0b4 (2011-02-08)
 ------------------
 
