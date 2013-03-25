@@ -1,0 +1,36 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2008-04-07 14:15-100\n"
+"Last-Translator: Maarten Kling <maarten@fourdigits.nl>\n"
+"Language-code: nl\n"
+"Language-name: Dutch\n"
+"Preferred-encodings: utf-8 latin1\n"
+"Domain: plone\n"
+"X-is-fallback-for: nl-nl\n"
+"Project-Id-Version: IMS\n"
+"PO-Revision-Date: 2013-03-25 10:18+0100\n"
+"Language-Team: Plone Nederland <info@plonenederland.nl>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: DUTCH\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "Message"
+msgstr "Bericht"
+
+msgid "A message"
+msgstr "Een bericht"
+
+msgid "ReceivedMessageFolder"
+msgstr "Ontvangen berichten map"
+
+msgid "The folder holding received messages"
+msgstr "De map met ontvangen berichten"
+
+msgid "SentMessageFolder"
+msgstr "Verzonden berichten map"
+
+msgid "The folder holding sent messages"
+msgstr "Een map met verzonden berichten"

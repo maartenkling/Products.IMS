@@ -1,0 +1,140 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2008-04-07 14:15-100\n"
+"Last-Translator: Maarten Kling <maarten@fourdigits.nl>\n"
+"Language-code: nl\n"
+"Language-name: Dutch\n"
+"Preferred-encodings: utf-8 latin1\n"
+"Domain: IMS\n"
+"X-is-fallback-for: nl-nl\n"
+"Project-Id-Version: IMS\n"
+"PO-Revision-Date: 2013-25-03 10:18+0100\n"
+"Language-Team: Plone Nederland <info@plonenederland.nl>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: DUTCH\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "title_receivedmessagefolder"
+msgstr "Ontvangen berichten"
+
+msgid "title_sentmessagefolder"
+msgstr "Verzonden berichten"
+
+msgid "New Message"
+msgstr "Nieuw bericht"
+
+msgid "Received Messages"
+msgstr "Ontvangen berichten"
+
+msgid "Sent Messages"
+msgstr "Verstuurde berichten"
+
+msgid "reply"
+msgstr "antwoorden"
+
+msgid "forward"
+msgstr "doorsturen"
+
+msgid "alert_really_delete"
+msgstr "Weet u zeker dat u de volgende berichten wilt verwijderen?"
+
+msgid "message_sentby"
+msgstr "${message} ontvangen van ${name}"
+
+msgid "message_sentto"
+msgstr "${message} gestuurd aan ${name}"
+
+msgid "thread_label_received"
+msgstr "ontvangen van ${name} - ${date}"
+
+msgid "thread_label_sent"
+msgstr "verzonden aan ${name} - ${date}"
+
+msgid "Subject"
+msgstr "Onderwerp"
+
+msgid "From"
+msgstr "Van"
+
+msgid "To"
+msgstr "Aan"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Message"
+msgstr "Bericht"
+
+msgid "no_sent_messages"
+msgstr "Je hebt geen berichten verzonden"
+
+msgid "no_received_messages"
+msgstr "Je hebt geen berichten ontvangen"
+
+msgid "read"
+msgstr "gelezen"
+
+msgid "unread"
+msgstr "ongelezen"
+
+msgid "forwarded"
+msgstr "doorgestuurd"
+
+msgid "replied"
+msgstr "beantwoord"
+
+msgid "mark as read"
+msgstr "Als gelezen markeren"
+
+msgid "delete"
+msgstr "verwijderen"
+
+msgid "send message"
+msgstr "bericht versturen"
+
+msgid "Reply to Message"
+msgstr "Reageer op bericht"
+
+msgid "Forward Message"
+msgstr "Bericht doorsturen"
+
+msgid "send"
+msgstr "Verzenden"
+
+msgid "cancel"
+msgstr "Annuleer"
+
+msgid "Your message has been sent successfully"
+msgstr "Uw bericht is succesvol verzonden"
+
+msgid "Sending your message failed"
+msgstr "Bij het verzenden van uw boodschap is een fout opgetreden"
+
+msgid "mail_subject"
+msgstr "Je hebt een nieuw bericht"
+
+msgid "mail_hello"
+msgstr "Hallo ${name},"
+
+msgid "mail_message_top"
+msgstr "Je hebt op ${site} [${url}]\n"
+"    een nieuw bericht ontvangen van ${name}.\n"
+"\n"
+"    --------------------\n"
+"\n"
+"    Onderwerp: ${subject}\n"
+
+msgid "mail_message_bottom"
+msgstr "\n"
+"    --------------------\n"
+"\n"
+"Om te reageren op dit bericht, volg dan de onderstaande link:"
+
+msgid "mail_greetings"
+msgstr "Met vriendelijke groeten"
+
+msgid "Unfortunately it is not possible to send messages using your user account. Please use a Plone user rather than a Zope user."
+msgstr "Helaas is de overdracht van berichten is niet mogelijk met uw gebruikersaccount. Gebruik in plaats daarvan een Plone gebruiker in plaats van een Zope gebruiker."
