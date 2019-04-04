@@ -2,10 +2,12 @@
 """
 
 from AccessControl import ClassSecurityInfo
+from Acquisition import aq_base
 
 from zope.interface import implements
 from zope.i18n import translate
 from zope.event import notify
+from Products.CMFCore.utils import getToolByName
 
 from Products.CMFCore.permissions import ModifyPortalContent, View
 
@@ -123,5 +125,49 @@ class Message(BaseContent):
     def manage_beforeDelete(self, item, container):
         notify(MessageBeforeDelete(item))
         BaseContentMixin.manage_beforeDelete(self, item, container)
-    
+
+    def _catalogs(self):
+        # return [getToolByName(self, 'email_catalog')]
+        return [getToolByName(self, 'portal_catalog')]
+
+    def indexObject(self):
+        for c in self._catalogs:
+            c.catalog_object(self)
+
+    def unindexObject(self):
+        """remove an object from all registered catalogs"""
+        path = '/'.join(self.getPhysicalPath())
+        for c in self._catalogs():
+            c.uncatalog_object(path)
+
+    def reindexObjectSecurity(self, skip_self=False):
+        path = '/'.join(self.getPhysicalPath())
+        for c in self._catalogs():
+            for brain in c.unrestrictedSearchResults(path=path):
+                brain_path = brain.getPath()
+                if brain_path == path and skip_self:
+                    continue
+            # Get the object
+            ob = brain._unrestrictedGetObject()
+
+            # Recatalog with the same catalog uid.
+            # _cmf_security_indexes in CMFCatalogAware
+            c.reindexObject(ob,
+                            idxs=self._cmf_security_indexes,
+                            update_metadata=0,
+                            uid=brain_path
+                            )
+
+    def reindexObject(self, idxs=[]):
+        """reindex object"""
+        if idxs == []:
+            # Update the modification date.
+            if hasattr(aq_base(self), 'notifyModified'):
+               self.notifyModified()
+        for c in self._catalogs():
+            if c is not None:
+                c.reindexObject(self,
+                                idxs=idxs
+                                )
+
 registerType(Message, PROJECTNAME)
